@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+int j,i,temp;
 // function to swap the the position of two elements
 void swap(int *a, int *b) {
   int temp = *a;
@@ -37,7 +37,6 @@ void insertionSort(int array[], int size) {
   printf("Order of Sorted elements: ");
   for(i=0;i<size;i++)
     printf(" %d", array[i]);
-  return 0;
 }
 
 int main() {
