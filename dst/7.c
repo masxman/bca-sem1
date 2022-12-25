@@ -1,126 +1,110 @@
-// Linked list operations in C
 #include <stdio.h>
 #include <stdlib.h>
-// Create a node
+
+// Structure for a node in the linked list
 struct Node {
-int data;
-struct Node* next;
+  int data;
+  struct Node* next;
 };
-// Insert at the beginning
-void insertAtBeginning(struct Node** head_ref, int new_data) {
-// Allocate memory to a node
-struct Node* new_node = (struct Node*)malloc(sizeof(struct
-Node));
-// insert the data
-new_node->data = new_data;
-new_node->next = (*head_ref);
-// Move head to new node
-(*head_ref) = new_node;
+
+// Function to create a new node with the given data and insert it
+// in the correct position in the sorted list
+void insert(struct Node** head, int data) {
+  // Create a new node
+  struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+  newNode->data = data;
+  newNode->next = NULL;
+
+  // If the list is empty or the new node should be inserted at the beginning
+  if (*head == NULL || (*head)->data > data) {
+    newNode->next = *head;
+    *head = newNode;
+  } else {
+    // Find the correct position to insert the new node
+    struct Node* current = *head;
+    while (current->next != NULL && current->next->data < data) {
+      current = current->next;
+    }
+
+    // Insert the new node
+    newNode->next = current->next;
+    current->next = newNode;
+  }
 }
-// Insert a node after a node
-void insertAfter(struct Node* prev_node, int new_data) {
-if (prev_node == NULL) {
-printf("the given previous node cannot be NULL");
-return;
+
+// Function to delete a node with the given data from the list
+void delete(struct Node** head, int data) {
+  struct Node* current = *head;
+  struct Node* prev = NULL;
+
+  // Find the node to be deleted
+  while (current != NULL && current->data != data) {
+    prev = current;
+    current = current->next;
+  }
+
+  // If the node was not found, do nothing
+  if (current == NULL) {
+    return;
+  }
+
+  // If the node to be deleted is the first node
+  if (prev == NULL) {
+    *head = current->next;
+  } else {
+    // Skip the node to be deleted
+    prev->next = current->next;
+  }
+
+  // Free the memory for the deleted node
+  free(current);
 }
-struct Node* new_node = (struct Node*)malloc(sizeof(struct
-Node));
-new_node->data = new_data;
-new_node->next = prev_node->next;
-prev_node->next = new_node;
+
+// Function to print the linked list
+void printList(struct Node* head) {
+  struct Node* current = head;
+  while (current != NULL) {
+    printf("%d ", current->data);
+    current = current->next;
+  }
+  printf("\n");
 }
-// Insert the the end
-void insertAtEnd(struct Node** head_ref, int new_data) {
-struct Node* new_node = (struct Node*)malloc(sizeof(struct
-Node));
-struct Node* last = *head_ref; /* used in step 5*/
-new_node->data = new_data;
-new_node->next = NULL;
-if (*head_ref == NULL) {
-*head_ref = new_node;
-return;
-}
-while (last->next != NULL) last = last->next;
-last->next = new_node;
-return;
-}
-// Delete a node
-void deleteNode(struct Node** head_ref, int key) {
-struct Node *temp = *head_ref, *prev;
-if (temp != NULL && temp->data == key) {
-*head_ref = temp->next;
-free(temp);
-return;
-}
-// Find the key to be deleted
-while (temp != NULL && temp->data != key) {
-prev = temp;
-temp = temp->next;
-}
-// If the key is not present
-if (temp == NULL) return;
-// Remove the node
-prev->next = temp->next;
-free(temp);
-}
-// Search a node
-int searchNode(struct Node** head_ref, int key) {
-struct Node* current = *head_ref;
-while (current != NULL) {
-if (current->data == key) return 1;
-current = current->next;
-}
-return 0;
-}
-// Sort the linked list
-void sortLinkedList(struct Node** head_ref) {
-struct Node *current = *head_ref, *index = NULL;
-int temp;
-if (head_ref == NULL) {
-return;
-} else {
-while (current != NULL) {
-// index points to the node next to current
-index = current->next;
-while (index != NULL) {
-if (current->data > index->data) {
-temp = current->data;
-current->data = index->data;
-index->data = temp;
-}
-index = index->next;
-}
-current = current->next;
-}
-}
-}
-// Print the linked list
-void printList(struct Node* node) {
-while (node != NULL) {
-printf(" %d ", node->data);
-node = node->next;
-}
-}
-// Driver program
+
 int main() {
-struct Node* head = NULL;
-insertAtEnd(&head, 1);
-insertAtBeginning(&head, 2);
-insertAtBeginning(&head, 3);
-insertAtEnd(&head, 4);
-insertAfte(head->next, 5);
-printf("Linked list: ");
-printList(head);
-printf("\nAfter deleting an element: ");
-deleteNode(&head, 3);
-printList(head);
-int item_to_find = 3;
-if (searchNode(&head, item_to_find)) {
-printf("\n%d is found", item_to_find);
-} else {
-printf("\n%d is not found", item_to_find);
+  // Create an empty linked list
+  struct Node* head = NULL;
+
+  // Insert the elements {61, 16, 8, 27} into the list
+  insert(&head, 61);
+  printf("List after inserting 61: ");
+  printList(head);
+
+  insert(&head, 16);
+  printf("List after inserting 16: ");
+  printList(head);
+
+  insert(&head, 8);
+  printf("List after inserting 8: ");
+  printList(head);
+
+  insert(&head, 27);
+  printf("List after inserting 27: ");
+  printList(head);
+
+  // Delete 8, 61, and 27 from the list
+  delete(&head, 8);
+  printf("List after deleting 8: ");
+  printList(head);
+  List(head);
+  delete(&head, 61);
+  printf("List after deleting 61: ");
+  printList(head);
+
+  delete(&head, 27);
+  printf("List after deleting 27: ");
+  printList(head);
+
+  return 0;
 }
-sortLinkedList(&head);
-printf("\nSorted List: ");
-printList(head);
-}
+
+
