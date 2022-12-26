@@ -1,27 +1,27 @@
-//II. Concatenate S1 and S2
-#include<stdio.h>
-#include<string.h>
-int main(){
-char a[20];
-char b[20];
-int i;
-char s1[100] = "programming ", s2[100] = "is awesome";
-int length, j;
-stringconcatenate(s1, s2);
+#include <stdio.h>
+#include <string.h>
+
+// Concatenate s1 and s2
+void stringconcatenate(char s1[100], char s2[100]) {
+  int length = 0;
+  // Find the length of s1
+  while (s1[length] != '\0') {
+    ++length;
+  }
+  // Concatenate s2 to s1
+  int j;
+  for (j = 0; s2[j] != '\0'; ++j) {
+    s1[length] = s2[j];
+    ++length;
+  }
+  // Terminating the s1 string
+  s1[length] = '\0';
 }
-// string concatenate
-char stringconcatenate(char s1[100], char s2[100]){
-length = 0;
-while (s1[length] != '\0') {
-++length;
-}
-// concatenate s2 to s1
-for (j = 0; s2[j] != '\0'; ++j) {
-s1[length] = s2[j];
-++length;
-}
-// terminating the s1 string
-s1[length] = '\0';
-printf("\n \n After concatenation: ");
-printf("%s", s1);
+
+int main() {
+  char s1[100] = "programming ";
+  char s2[100] = "is awesome";
+  stringconcatenate(s1, s2);
+  printf("\n\nAfter concatenation: %s", s1);
+  return 0;
 }

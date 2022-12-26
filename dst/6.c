@@ -19,8 +19,7 @@ printf("Queue is overflow..");
 else
 {
 rear=(rear+1)%max; // rear is incremented
-queue[rear]=element; // assigning a value to the queue at the
-rear position.
+queue[rear]=element; // assigning a value to the queue at the rear position.
 }
 }
 // function to delete the element from the queue
