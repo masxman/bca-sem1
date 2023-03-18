@@ -1,19 +1,27 @@
-#include <stdio.h>
+#include<stdio.h>
+int main()
+{
 
-int main() {
-    int num, sum = 0;
+int num,sum=0;
 
-    do {
-        printf("Enter a number (999 to exit): ");
-        scanf("%d", &num);
+printf("Enter Postive numbers to sum and enter 999 to exit");
 
-        if (num > 0) {
-            sum += num;
-        }
-    } while (num != 999);
+while(1){
+    printf("\nEnter number:");
+	scanf("%d",&num);
+	
+	if(num==999){
+		break;
+	}
+    
+	if(num>0){
+      sum=sum+num;
+    }
+    else{
+      printf("\n enter a positive number");
+    }
+}	
 
-    printf("Sum of positive numbers: %d\n", sum);
-
-    return 0;
+printf("\n Sum = %d",sum);
+return 0;
 }
-

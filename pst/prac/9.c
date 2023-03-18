@@ -15,12 +15,17 @@ int main() {
     for (i = 0; i < n; i++) {
         for (j = i + 1; j < n; j++) {
             if (arr[i] == arr[j]) {
-                break;
+                for (k = j; k < n - 1; k++) {
+                    arr[k] = arr[k + 1];
+                }
+                n--;
+                j--;
             }
         }
-        if (j == n) {
-            new_arr[count++] = arr[i];
-        }
+    }
+
+    for (i = 0; i < n; i++) {
+        new_arr[count++] = arr[i];
     }
 
     printf("The array after removing duplicates is:\n");
@@ -30,4 +35,3 @@ int main() {
 
     return 0;
 }
-
