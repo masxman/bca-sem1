@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool isPrime(int num);
+int isPrime(int num);
 
 int main() {
-    int num;
-    bool prime;
+    int num, prime;
 
     printf("Enter a positive integer: ");
     scanf("%d", &num);
@@ -21,17 +20,16 @@ int main() {
     return 0;
 }
 
-bool isPrime(int num) {
+int isPrime(int num) {
     if (num <= 1) {
-        return false;
+        return 0;
     }
 
     for (int i = 2; i <= num / 2; ++i) {
         if (num % i == 0) {
-            return false;
+            return 0;
         }
     }
 
-    return true;
+    return 1;
 }
-
