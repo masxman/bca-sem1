@@ -1,69 +1,81 @@
 #include <stdio.h>
+int m,n, i, j;
+int a[10][10];
+int b[10][10];
+int sum[10][10];
+int diff[10][10];
+void enterData(int a[10][10]);
+void addMatrix(int a[10][10], int b[10][10]);
+void subMatrix(int a[10][10], int b[10][10]);
+void display(int sum[10][10]);
 
-void input_matrix(int rows, int cols, int matrix[][cols]);
-void display_matrix(int rows, int cols, int matrix[][cols]);
-void add_matrices(int rows, int cols, int matrix1[][cols], int matrix2[][cols], int result[][cols]);
-void subtract_matrices(int rows, int cols, int matrix1[][cols], int matrix2[][cols], int result[][cols]);
+int main(){
 
-int main() {
-    int rows, cols;
-    printf("Enter the number of rows and columns of the matrices: ");
-    scanf("%d %d", &rows, &cols);
+printf("\n enter rows and columns for the matrix");
+scanf("%d %d", &m, &n);
 
-    int matrix1[rows][cols], matrix2[rows][cols], sum[rows][cols], difference[rows][cols];
+printf("\nEnter elements of matrix 1:\n");
+enterData(a);
+printf("\nmatrix1\n");
+display(a);
 
-    printf("Enter the elements of the first matrix:\n");
-    input_matrix(rows, cols, matrix1);
+printf("\nEnter elements of matrix 2:\n");
+enterData(b);
+printf("\nmatrix2\n");
+display(b);
 
-    printf("Enter the elements of the second matrix:\n");
-    input_matrix(rows, cols, matrix2);
-
-    add_matrices(rows, cols, matrix1, matrix2, sum);
-    subtract_matrices(rows, cols, matrix1, matrix2, difference);
-
-    printf("The sum of the matrices is:\n");
-    display_matrix(rows, cols, sum);
-
-    printf("The difference of the matrices is:\n");
-    display_matrix(rows, cols, difference);
-
-    return 0;
+addMatrix(a,b);
+printf("\n Sum of two matrix is: \n");
+display(sum);
+subMatrix(a,b);
+printf("\n difference of two matrix is: \n");
+display(diff);
 }
 
-void input_matrix(int rows, int cols, int matrix[][cols]) {
-    int i, j;
-    for (i = 0; i < rows; i++) {
-        for (j = 0; j < cols; j++) {
-            scanf("%d", &matrix[i][j]);
-        }
+
+void enterData(int a[10][10])
+{
+int i, j;
+for(i = 0; i < m; ++i)
+{
+for(j = 0; j < n; ++j)
+{
+
+
+scanf("%d", &a[i][j]);
+}
+}
+}
+
+void display(int sum[10][10])
+{
+
+int i, j;
+
+for(i = 0; i < m; ++i)
+{
+for(j = 0; j < n; ++j)
+{
+printf("%d  ", sum[i][j]);
+}
+    printf("\n\n");
+}
+}
+
+
+void addMatrix(int a[10][10], int b[10][10]){
+  for(i = 0; i < m; ++i)
+{
+for(j = 0; j < n; ++j){
+      sum[i][j]= a[i][j]+b[i][j];
     }
 }
-
-void display_matrix(int rows, int cols, int matrix[][cols]) {
-    int i, j;
-    for (i = 0; i < rows; i++) {
-        for (j = 0; j < cols; j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
 }
 
-void add_matrices(int rows, int cols, int matrix1[][cols], int matrix2[][cols], int result[][cols]) {
-    int i, j;
-    for (i = 0; i < rows; i++) {
-        for (j = 0; j < cols; j++) {
-            result[i][j] = matrix1[i][j] + matrix2[i][j];
-        }
-    }
-}
-
-void subtract_matrices(int rows, int cols, int matrix1[][cols], int matrix2[][cols], int result[][cols]) {
-    int i, j;
-    for (i = 0; i < rows; i++) {
-        for (j = 0; j < cols; j++) {
-            result[i][j] = matrix1[i][j] - matrix2[i][j];
-        }
-    }
-}
-
+void subMatrix(int a[10][10], int b[10][10]){
+	for(i-0;i<m;++i)
+	{
+		for(j=0;i<n;++i)
+		{
+			diff[i][j]=a[i][j]-b[i][j];
+		}}}
